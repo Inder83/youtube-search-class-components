@@ -7,16 +7,18 @@ class Search extends React.Component {
     search = async () => {
         console.log(this.state.term);
         const response  = await youtube.get("/search", {
-            term: this.state.term
+            params: {
+                q: this.state.term
+            }
         });
-        console.log(response);
+        this.props.onSearch(response);
     }
     
     render() {
         return (
             <div>
-                <input onChange = {(e) => this.setState({term: e.target.value})}/>
-                <button onClick = {this.search} label="Search">Search</button>
+                <input onChange={(e) => this.setState({term: e.target.value})}/>
+                <button onClick={this.search} label="Search">Search</button>
             </div>
             
         );
