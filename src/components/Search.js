@@ -5,7 +5,6 @@ class Search extends React.Component {
     state = {term: ''};
 
     search = async () => {
-        console.log(this.state.term);
         const response  = await youtube.get("/search", {
             params: {
                 q: this.state.term

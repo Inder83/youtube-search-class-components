@@ -1,19 +1,26 @@
 import React from 'react'
 import Search from './Search'
 import VideoList from './VideoList'
+import VideoFrame from './VideoFrame'
 
 class App extends React.Component {
     state = {videos: []}
     onSearch = (data) => {
-        console.log(data.data.items);
-        this.setState({videos: data.data.items});
+        this.setState({videos: data.data.items, selectedVideo: undefined});
+    }
+
+    onItemClick = (id) => {
+        this.setState({selectedVideo: id});
     }
 
     render() {
         return (
             <div>
                 <Search onSearch={this.onSearch}/>
-                <VideoList list={this.state.videos}/>
+                <div>
+                    <VideoFrame videoSource={this.state.selectedVideo}/>
+                    <VideoList list={this.state.videos} onItemClick={this.onItemClick}/>
+                </div>
             </div>
         );
     }       

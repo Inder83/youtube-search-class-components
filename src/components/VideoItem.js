@@ -5,15 +5,19 @@ class VideoItem extends React.Component {
 
     componentDidMount() {
         const {snippet, id} = this.props.video;
-        this.setState({thumbnail: snippet.thumbnails.medium.url, title: snippet.channelTitle, description: snippet.description, id: id.videoId});
+        this.setState({thumbnail: snippet.thumbnails.medium.url, title: snippet.title, description: snippet.description, id: id.videoId});
+    }
+
+    onItemClick = () => {
+        this.props.onItemClick(this.state.id);
     }
 
     render() {
         return (
-            <div style={{border:'1px'}}>
+            <div style={{border:'1px solid black'}}>
                 <div><img src={this.state.thumbnail} alt={this.state.title}/></div>
                 <div>
-                    <div>{this.state.title}</div>
+                    <div onClick={this.onItemClick} style={{cursor: 'pointer'}}>{this.state.title}</div>
                     <div>{this.state.description}</div>
                 </div>
             </div>
